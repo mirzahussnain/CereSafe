@@ -1,11 +1,11 @@
 from fastapi import APIRouter
 import shap
 
-from utils.resultRefiner import RefinePredictionResult
+from app.utils.resultRefiner import RefinePredictionResult
 router= APIRouter()
 from fastapi import APIRouter, HTTPException
 import pandas as pd
-from models.InputModel import PredictionInputMerged, PredictionInputSingle
+from app.models.InputModel import PredictionInputMerged, PredictionInputSingle
 
 # Create a router instance
 router = APIRouter()
