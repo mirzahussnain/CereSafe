@@ -9,7 +9,7 @@ export async function GET(){
         if(!user){
             const result=await supabase.from("advices").select("risk_level,advices,description").eq("risk_factor","general")
             if(result.status===200){
-                return {success:1,data:result.data,message:"General recommendation fetched successfully."}
+                return NextResponse.json({success:1,data:result.data,message:"General recommendation fetched successfully."})
             }
             else{
                 throw new Error(`Failed to Fetch Recommendations:${result.error}`)
