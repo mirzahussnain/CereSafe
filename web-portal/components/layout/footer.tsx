@@ -37,7 +37,7 @@ export default function Footer() {
               className="rounded-full bg-primary/50"
             />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-red-700 to-purple-500 text-transparent bg-clip-text">
-              Cera<span className="text-lg">Safe</span>
+              Cere<span className="text-lg">Safe</span>
             </h1>
           </Link>
           <ul className="flex justify-start items-center gap-5 px-2 text-muted-foreground">

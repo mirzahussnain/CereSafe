@@ -1,3 +1,4 @@
+"use client";
 import { MobileNav as MobileNavType, NavGroupType, NavItem } from "@/lib/types";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -6,6 +7,8 @@ import { Button } from "../ui/button";
 import { signOut } from "@/utils/helpers/auth";
 import router from "next/router";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export function MobileNav({
   isMobileMenuOpen,
@@ -14,8 +17,8 @@ export function MobileNav({
   toggleMobileMenu,
   user,
 }: MobileNavType) {
-     const handleLogout = async () => {
-    
+  const [avatarUrl, setAvatarUrl] = useState<string | null>();
+  const handleLogout = async () => {
     const result = await signOut();
     if (result.success) {
       toast.success(result.message);
@@ -23,6 +26,32 @@ export function MobileNav({
       toast.error(result.message);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      const fetchAvatar = async () => {
+        const supabase = createClient();
+
+        const avatarPath: string = user.user_metadata.avatar_url;
+        if (!avatarPath) return;
+
+        if (avatarPath.startsWith("http")) {
+          setAvatarUrl(avatarPath);
+        } else {
+          const { data, error } = await supabase.storage
+            .from("avatars")
+            .createSignedUrl(avatarPath, 60 * 60);
+
+          if (!error && data?.signedUrl) {
+            setAvatarUrl(data.signedUrl);
+          }
+        }
+      };
+      fetchAvatar();
+
+      fetchAvatar();
+    }
+  }, [user]);
   return (
     <AnimatePresence>
       {isMobileMenuOpen && (
@@ -42,22 +71,32 @@ export function MobileNav({
             >
               {user ? (
                 <>
-                <Link href={"/profile"} className="flex items-center gap-2 px-4 py-2">
-                  <Image
-                    src={user?.user_metadata?.avatar_url || "/avatar.jpg"}
-                    alt="User profile picture"
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover"
-                  />
-                  <span className="text-lg font-medium text-primary">
-                    {user?.user_metadata?.full_name}
-                  </span>
-                </Link>
-                <Button onClick={handleLogout}>
-                    Sign Out
-                </Button>
-                
+                  <Link
+                    href={"/profile"}
+                    className="flex items-center gap-2 px-4 py-2"
+                  >
+                    {avatarUrl ? (
+                      <Image
+                        src={avatarUrl}
+                        alt="User profile picture"
+                        width={40}
+                        height={20}
+                        className="rounded-full object-cover  cursor-pointer hover:opacity-80 transition-opacity h-9"
+                      />
+                    ) : (
+                      <Image
+                        src={"/avatar.jpg"}
+                        alt="User profile picture"
+                        width={40}
+                        height={20}
+                        className="rounded-full object-cover  cursor-pointer hover:opacity-80 transition-opacity w-9 h-9"
+                      />
+                    )}
+                    <span className="text-lg font-medium text-primary">
+                      {user?.user_metadata?.full_name}
+                    </span>
+                  </Link>
+                  <Button onClick={handleLogout}>Sign Out</Button>
                 </>
               ) : (
                 <Link
@@ -83,7 +122,10 @@ export function MobileNav({
                     </div>
                     <ul className="pl-6 space-y-2 ">
                       {item.map((service) => (
-                        <li key={service.href} className="border-b-1 rounded-b-2xl ">
+                        <li
+                          key={service.href}
+                          className="border-b-1 rounded-b-2xl "
+                        >
                           <Link
                             href={service.href}
                             className={`block px-4 py-2 text-sm font-medium text-primary hover:text-secondary rounded-b-2xl  ${
@@ -120,7 +162,7 @@ export function MobileNav({
               transition={{ delay: navItems.length * 0.1 }}
             >
               <Link
-              href={'/services/stroke-prediction'}
+                href={"/services/stroke-prediction"}
                 className="w-full text-center py-2 text-sm font-semibold border-2 bg-overlay-2   rounded-xl transition"
                 onClick={toggleMobileMenu}
               >
