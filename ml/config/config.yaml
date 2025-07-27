@@ -1,0 +1,42 @@
+dataset_names:
+  stroke: "Stroke"
+  parkinsons: "Parkinsons"
+  merged: "merged"
+
+data_path:
+  raw:
+    stroke: "data/raw/stroke_data.csv"
+    parkinsons: "data/raw/parkinsons_data.csv"
+    merged: "data/processed/merged/Mstroke.csv"
+  processed: 
+      stroke: "data/processed/stroke/"
+      parkinsons: "data/processed/parkinsons/"
+      merged: "data/processed/merged/"
+  train: 
+      stroke: "data/splits/train/stroke/"
+      parkinsons: "data/splits/train/parkinsons/"
+      merged:  "data/splits/train/merged/"
+  test: 
+      stroke: "data/splits/test/stroke/"
+      parkinsons: "data/splits/test/parkinsons/"
+      merged:  "data/splits/test/merged/"
+
+artifacts:
+    models: "artifacts/models"
+    pipelines: "artifacts/pipelines"
+features:
+  activity_thresholds:
+            under_5: {  # Ages 0-4
+                low: 1,     # Less than 1 hour/day = Low
+                moderate: 2 # 1-2 hours/day = Moderate, >2 = High
+            }
+            children: {  # Ages 5-18
+                low: 0.5,   # Less than 30 mins/day = Low
+                moderate: 1  # 30-60 mins/day = Moderate, >1 hour = High
+            }
+            adults: {  # Ages 19+
+                low: 0.25,    # Less than 15 mins/day = Low
+                moderate: 0.5 # 15-30 mins/day = Moderate, >30 mins = High
+            }
+      
+      

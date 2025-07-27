@@ -1,0 +1,10 @@
+project:
+    name: CeraSafe
+    version: 1.0
+
+paths:
+  data: "data/"
+  artifacts: 
+    models: "ml/artifacts/models"
+    pipelines: "ml/artifacts/pipelines/"
+  pipelines: "ml/pipelines/"

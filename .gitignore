@@ -1,0 +1,80 @@
+# === GLOBAL ===
+.DS_Store
+*.pem
+*.log
+*.tmp
+*.bak
+*.lock
+*.sqlite3
+*.tsbuildinfo
+next-env.d.ts
+
+# === ENV FILES ===
+.env
+.env.*
+
+
+# === DEBUG LOGS ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# === WEB-PORTAL (Next.js + Yarn PnP) ===
+web-portal/node_modules/
+web-portal/.pnp/
+web-portal/.pnp.*
+web-portal/.yarn/*
+!web-portal/.yarn/patches
+!web-portal/.yarn/plugins
+!web-portal/.yarn/releases
+!web-portal/.yarn/versions
+web-portal/coverage/
+web-portal/.next/
+web-portal/out/
+web-portal/build/
+web-portal/.env*
+web-portal/.vercel/
+web-portal/supabase
+
+# === BACKEND (FastAPI) ===
+backend/.env
+backend/.venv/
+backend/venv/
+backend**/__pycache__/
+backend/*.pyc
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.coverage
+backend/coverage.xml
+backend/.ruff_cache
+backend/.vscode/
+
+# === ML (Jupyter / model scripts) ===
+ml/.env
+ml**/__pycache__/
+ml/*.pyc
+ml/*.ipynb_checkpoints/
+ml/.venv/
+ml/venv/
+ml/.mypy_cache/
+ml/.pytest_cache/
+ml/models/
+ml/outputs/
+ml/runs/
+ml/weights/
+
+ml/.vscode/
+ml/catboost_info
+
+
+
+# === OS & EDITORS ===
+.vscode/
+.venv
+.qodo
+.idea/
+*.swp
+*.swo
+
