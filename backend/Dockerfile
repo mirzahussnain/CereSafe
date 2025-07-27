@@ -25,16 +25,13 @@ COPY . .
 
 # Set Python path to include the app directory (where app module resides)
 WORKDIR /app/backend/app
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
 
 # Expose port (Render will override this)
 EXPOSE 8000
 
 # Health check endpoint (adjust port to $PORT)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:$PORT/health || exit 1
+    CMD curl -f http://localhost:8000/health || exit 1
 
 # Run the application with dynamic port from Render
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000"]
