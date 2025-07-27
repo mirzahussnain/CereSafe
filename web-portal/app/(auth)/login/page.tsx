@@ -1,6 +1,5 @@
 'use client';
 import OAuth from '@/components/layout/OAuth';
-import { useUser } from '@/hooks/useUserPredictions';
 import { LoginFormInputsType } from '@/lib/types';
 import { signInWithPassword } from '@/utils/helpers/auth';
 import { loginSchema } from '@/utils/helpers/schema-validation';
@@ -109,13 +108,13 @@ export default function Login() {
           >
             Password
           </label>
-          {/* <button
+           <button
             type="button"
-            className="absolute top-[18px] right-[25px] text-[20px] cursor-pointer"
+            className="absolute md:hidden top-[18px] right-[25px] text-[20px] cursor-pointer"
             onClick={() => setDisplayPassword(!displayPassword)}
           >
             {displayPassword ? <Eye /> : <EyeClosed />}
-          </button> */}
+          </button>
           {errors.password && <p className="text-sm text-red-500 mt-1 ml-2">{errors.password.message}</p>}
         </div>
         <div className="flex justify-end text-[15px]">
