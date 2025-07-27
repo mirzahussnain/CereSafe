@@ -21,11 +21,10 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY ./app .
+COPY . .
 
 # Set Python path to include the app directory (where app module resides)
-ENV PYTHONPATH=/app
-
+WORKDIR /app/backend/app
 # Create non-root user for security
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
