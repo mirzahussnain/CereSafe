@@ -77,11 +77,11 @@ class CategoricalColumnEncoder(BaseEstimator,TransformerMixin):
 
 
 class PostSplitProcessingStroke(BaseEstimator, TransformerMixin):
-    def __init__(self, verbose: bool = True):
+    def __init__(self, verbose: bool = False):
         self.verbose = verbose
         self.binary_encoder = BinaryColumnEncoder(verbose=verbose)
         self.categorical_encoder = CategoricalColumnEncoder(verbose=verbose)
-        self.imputer=KNNImputer(n_neighbors=4, weights="uniform")
+        self.imputer=KNNImputer(n_neighbors=3, weights="uniform")
         # self.scaler1=MinMaxScaler()
         # self.scaler2=RobustScaler()
     def fit(self, X: pd.DataFrame, y=None):
@@ -135,7 +135,7 @@ class PostSplitProcessingParkinsons(BaseEstimator, TransformerMixin):
         return X_transformed
 
 class PostSplitProcessingMerged(BaseEstimator, TransformerMixin):
-    def __init__(self,verbose: bool = False):
+    def __init__(self,verbose: bool = True):
         self.verbose = verbose
         self.ordinal_encoder = OrdinalColumnEncoder(verbose=verbose)
         self.binary_encoder = BinaryColumnEncoder(verbose=verbose)

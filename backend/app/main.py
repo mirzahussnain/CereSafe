@@ -1,15 +1,15 @@
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import joblib
 from dotenv import load_dotenv
 import os
 import numpy as np
-from utils.config_loader import get_config
+from utils.config_loader  import get_config
 from utils.model_loader import load_model
 from api.routes.routes import set_model,router
 # Initialize FastAPI app
+
+
 app = FastAPI(title="Stroke Risk Prediction", description="API for Stroke risk predictions")
 
 load_dotenv()

@@ -1,3 +1,0 @@
-model:
-  merged_data: app/services/sp.joblib
-  single_data: app/services/stp.joblib
