@@ -138,13 +138,13 @@ export default function Register() {
           >
             Password
           </label>
-          {/* <button
+          <button
             type="button"
-            className="absolute top-3 sm:top-4 right-4 sm:right-5 text-lg sm:text-xl cursor-pointer"
+            className="absolute md:hidden top-3 sm:top-4 right-4 sm:right-5 text-lg sm:text-xl cursor-pointer"
             onClick={() => setDisplayPassword(!displayPassword)}
           >
             {displayPassword ? <Eye /> : <EyeClosed />}
-          </button> */}
+          </button>
           {errors.password && <span className="text-destructive text-xs sm:text-sm mt-1">{errors.password.message}</span>}
         </div>
         <div className="relative flex flex-col my-4">
