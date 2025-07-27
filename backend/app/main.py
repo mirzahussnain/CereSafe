@@ -6,9 +6,9 @@ import joblib
 from dotenv import load_dotenv
 import os
 import numpy as np
-from app.utils.config_loader import get_config
-from app.utils.model_loader import load_model
-from app.api.routes.routes import set_model,router
+from utils.config_loader import get_config
+from utils.model_loader import load_model
+from api.routes.routes import set_model,router
 # Initialize FastAPI app
 load_dotenv()
 app = FastAPI(title="Stroke Risk Prediction", description="API for Stroke risk predictions")

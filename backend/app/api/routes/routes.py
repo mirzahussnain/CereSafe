@@ -5,7 +5,7 @@ from app.utils.resultRefiner import RefinePredictionResult
 router= APIRouter()
 from fastapi import APIRouter, HTTPException
 import pandas as pd
-from app.models.InputModel import PredictionInputMerged, PredictionInputSingle
+from models.InputModel import PredictionInputMerged, PredictionInputSingle
 
 # Create a router instance
 router = APIRouter()
