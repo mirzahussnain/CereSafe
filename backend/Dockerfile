@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Set Python path to include the app directory (where app module resides)
-WORKDIR /app/backend/app
+WORKDIR /backend/app
 
 # Expose port (Render will override this)
 EXPOSE 8000
