@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from utils.resultRefiner import RefinePredictionResult
+from app.utils.resultRefiner import RefinePredictionResult
 router= APIRouter()
 from fastapi import APIRouter, HTTPException
 import pandas as pd
