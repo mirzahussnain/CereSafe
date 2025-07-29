@@ -11,7 +11,7 @@ export type NavItem = {
 export type RiskFactor = {
   feature: string;
   value:number;
-  impace:number;
+  impact:number;
 };
 
 export type UserPrediction = {

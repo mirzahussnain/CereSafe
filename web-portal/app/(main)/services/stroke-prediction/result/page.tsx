@@ -98,7 +98,7 @@ export default function PredictionResult() {
           
           Predict Again
           </Link>
-          <Link href={"/services/stroke-prediction"} className="font-medium px-5 py-1.5 border-double border-4 rounded-lg bg-overlay-1  mt-1">Sign In</Link>
+          <Link href={"/login"} className="font-medium px-5 py-1.5 border-double border-4 rounded-lg bg-overlay-1  mt-1">Sign In</Link>
 
           </div>
         <Result predictionResult={predictionResult}/>

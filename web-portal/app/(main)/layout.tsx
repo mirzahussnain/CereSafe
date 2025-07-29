@@ -47,8 +47,8 @@ export default function RootLayout({
             <AuthProvider>
               <Navbar />
               {children}
-              <Toaster />
               <Footer />
+              <Toaster />
             </AuthProvider>
           </Suspense>
           <div className="fixed bottom-5 right-5 bg-primary/40 rounded-sm hover:bg-primary/30 hover:cursor-pointer z-20">

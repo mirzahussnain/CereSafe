@@ -238,19 +238,19 @@ export default function HistoryPage() {
                   Manage your stroke risk
                 </p>
               </div>
-              <div className="space-y-4 mt-6">
+              <div className="space-y-4 mt-6 mb-10">
                 <Button className="w-full py-6 text-lg bg-gradient-to-r text-secondary-foreground from-primary-foreground to-overlay-2/90 hover:from-overlay-2/90 hover:to-primary-foreground cursor-pointer">
                   <Link href={"/services/stroke-prediction"}>
                     Predict New Risk
                   </Link>
                 </Button>
 
-                <Button variant="outline" className="w-full">
+                {/* <Button variant="outline" className="w-full">
                   Compare Assessments
                 </Button>
                 <Button variant="outline" className="w-full">
                   Download Report
-                </Button>
+                </Button> */}
               </div>
             </Card>
           </div>
@@ -338,12 +338,12 @@ export default function HistoryPage() {
                           </div>
                         </div>
 
-                        <div className="md:text-right">
+                        {/* <div className="md:text-right">
                           <Button variant="outline" className="mr-2">
                             View Details
                           </Button>
                           <Button variant="ghost">Compare</Button>
-                        </div>
+                        </div> */}
                       </div>
 
                       {prediction.factors && prediction.factors.length > 0 && (

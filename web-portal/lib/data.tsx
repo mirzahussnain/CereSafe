@@ -1,5 +1,5 @@
-import { User, FileText, CheckCircle, BrainCircuit, BarChart2, FileDown, BarChart, LayoutDashboardIcon, Settings,HistoryIcon, Goal } from "lucide-react";
-import {  NavGroupType, NavItem } from "./types";
+import { User, FileText, CheckCircle, BrainCircuit, BarChart2, FileDown, BarChart, LayoutDashboardIcon, Settings,HistoryIcon, Goal, HomeIcon } from "lucide-react";
+import {  NavGroupType, NavItem, RiskFactor } from "./types";
 
 export const LandingPageData= [
   {
@@ -55,11 +55,11 @@ export const navItems: (NavItem | NavGroupType)[] = [
         label: "Stroke Prediction",
         desc: "Predict Stroke Risk with AI",
       },
-      {
-        href: "/services/health-shorts/about",
-        label: "Health Shorts",
-        desc: "Watch Short Videos on Healthcare Topics",
-      },
+      // {
+      //   href: "/services/health-shorts/about",
+      //   label: "Health Shorts",
+      //   desc: "Watch Short Videos on Healthcare Topics",
+      // },
     ],
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
@@ -79,11 +79,12 @@ export const navItems: (NavItem | NavGroupType)[] = [
         icon: <HistoryIcon />,
         path: "/dashboard/history",
       },
-      {
-        title: "Health Insights",
-        icon: <BarChart />,
-        path: "/dashboard/health-insights",
+       {
+        title: "Home",
+        icon: <HomeIcon />,
+        path: "/",
       },
+     
       {
         title: "Prediction Result",
         icon: <Goal />,
@@ -103,7 +104,7 @@ export const navItems: (NavItem | NavGroupType)[] = [
   },
 ];
 
-export const getRefinedFeatures = (factors: { feature: string; value: number, impact:number }[]): string[] => {
+export const getRefinedFeatures = (factors: RiskFactor[]): string[] => {
     return factors.map(factor => {
       switch (factor.feature) {
         case 'Hypertension':
@@ -133,6 +134,37 @@ export const getRefinedFeatures = (factors: { feature: string; value: number, im
       }
     });
   }
+
+
+
+
+
+
+  export const getRiskLevel = (factor: RiskFactor): "high" | "moderate" | null => {
+  switch (factor.feature) {
+    case "Hypertension":
+      return factor.value === 1 ? "high" : null;
+    case "Bmi":
+      if (factor.value >= 30) return "high"; // obese
+      if (factor.value >= 25) return "moderate"; // overweight
+      return null;
+    case "Age":
+      return factor.value > 60 ? "high" : factor.value > 45 ? "moderate" : null;
+    case "HeartDisease":
+      return factor.value === 1 ? "high" : null;
+    case "AvgGlucoseLevel":
+      if (factor.value >= 126) return "high"; // diabetic
+      if (factor.value >= 100) return "moderate"; // prediabetic
+      return null;
+    case "SmokingStatus":
+      return factor.value === 1 ? "high" : null;
+    case "Diabetes":
+      return factor.value === 1 ? "high" : null;
+    default:
+      return null;
+  }
+};
+
 
   export const RiskColorTag = (riskLevel?: string): string => {
     switch (riskLevel?.toLowerCase()) {

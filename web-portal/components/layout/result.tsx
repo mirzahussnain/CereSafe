@@ -33,7 +33,7 @@ export default function Result({predictionResult}:{predictionResult:PredictionRe
                     {predictionResult.factors.map((factor, index) => (
                       <li key={index} className="md:grid grid-cols-2 gap-2 text-sm flex flex-col items-center">
                         <span className="col-span-2 text-secondary-foreground font-semibold bg-overlay-2/80 w-fit h-fit rounded-lg px-2 py-1 tracking-wide">{factor.feature}</span>
-                        <p className=" col-span-2 text-[13px] w-full md:text-[15px] text-primary/60 font-medium text-justify">{getRefinedFeatures([factor])[0]}</p>
+                        <p className=" col-span-2 text-[13px] w-full md:text-[15px] text-primary/60 font-medium text-center md:text-justify">{getRefinedFeatures([factor])[0]}</p>
 
                       </li>
                       
