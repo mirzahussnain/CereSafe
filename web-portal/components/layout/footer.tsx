@@ -42,17 +42,17 @@ export default function Footer() {
           </Link>
           <ul className="flex justify-start items-center gap-5 px-2 text-muted-foreground">
             <li>
-              <Link href="/">
+              <Link href="https://x.com/Hussy23king3">
                 <XIcon size={20} />
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="https://linkedin.com/in/hussnain-ali-202738191">
                 <LinkedinIcon size={20} />
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="https://github.com/mirzahussnain">
                 <Github />
               </Link>
             </li>

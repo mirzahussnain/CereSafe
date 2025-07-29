@@ -9,7 +9,7 @@ export default function PredictStroke() {
   return (
     <div className="min-h-screen px-4 md:px-8 lg:px-36 py-24 bg-background flex flex-col justify-center items-center">
       <ServiceBanner
-        title="Predict Stroke Risk with CeraSafe"
+        title="Predict Stroke Risk with CereSafe"
         description=" Use our AI-powered prediction tool to estimate your risk of stroke based
         on health indicators. It’s fast, free, and secure."
       />

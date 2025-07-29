@@ -6,7 +6,7 @@ const HealthShorts = () => {
   return (
     <div className="min-h-screen px-4 md:px-8 lg:px-36 py-24 bg-background flex flex-col  items-center">
       <ServiceBanner
-        title="Watch Health Shorts at CeraSafe"
+        title="Watch Health Shorts at CereSafe"
         description=" Your daily dose of health wisdom! Short videos, big impact—anytime, anywhere."
       />
       <motion.h1

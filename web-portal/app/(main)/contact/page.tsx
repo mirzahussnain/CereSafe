@@ -26,7 +26,7 @@ const Contact = () => {
                 href="mailto:your.email@example.com"
                 className="text-base font-medium hover:underline"
               >
-                your.email@example.com
+                Ali-h24@ulster.ac.uk
               </a>
             </div>
           </div>
@@ -37,7 +37,7 @@ const Contact = () => {
             <div className="flex gap-4">
               <Button asChild variant="ghost" size="icon">
                 <a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/mirzahussnain"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
@@ -47,7 +47,7 @@ const Contact = () => {
               </Button>
               <Button asChild variant="ghost" size="icon">
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/hussnain-ali-202738191"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -57,7 +57,7 @@ const Contact = () => {
               </Button>
               <Button asChild variant="ghost" size="icon">
                 <a
-                  href="https://twitter.com/yourusername"
+                  href="https://x.com/Hussy23king3"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter"

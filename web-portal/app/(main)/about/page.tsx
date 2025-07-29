@@ -32,7 +32,7 @@ const AboutMe = () => {
       <Tabs defaultValue="personal" className="w-full max-w-5xl mt-12">
       <TabsList className="grid w-full grid-cols-2 mb-6">
         <TabsTrigger value="personal">Personal</TabsTrigger>
-        <TabsTrigger value="cerasafe">Cerasafe</TabsTrigger>
+        <TabsTrigger value="ceresafe">Ceresafe</TabsTrigger>
       </TabsList>
 
       {/* Personal Tab */}
@@ -53,12 +53,12 @@ const AboutMe = () => {
       </TabsContent>
 
       {/* Cerasafe Tab */}
-      <TabsContent value="cerasafe">
+      <TabsContent value="ceresafe">
         <Card>
           <CardContent className="space-y-6 p-6">
-            <h2 className="text-2xl font-semibold text-primary">What is Cerasafe?</h2>
+            <h2 className="text-2xl font-semibold text-primary">What is Ceresafe?</h2>
             <p className="text-muted-foreground">
-              Cerasafe is a web-based stroke prediction platform built for both public users. It uses machine learning
+              Ceresafe is a web-based stroke prediction platform built for both public users. It uses machine learning
               models trained on stroke-related health data to assess the user's risk level. Users can interact with the system
               either anonymously or by signing into a personal dashboard.
             </p>
@@ -82,7 +82,7 @@ const AboutMe = () => {
             <h3 className="text-xl font-medium text-primary">Why Focus on Recall?</h3>
             <p className="text-muted-foreground">
               In medical prediction — especially for conditions like stroke — <strong>missing a positive case (false negative)</strong> can be life-threatening.
-              That’s why Cerasafe prioritizes <strong>recall</strong>: we aim to capture as many real stroke risks as possible,
+              That’s why Ceresafe prioritizes <strong>recall</strong>: we aim to capture as many real stroke risks as possible,
               even at the cost of a few false positives. It’s a deliberate, life-saving trade-off.
             </p>
 

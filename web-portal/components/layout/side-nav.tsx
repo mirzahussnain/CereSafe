@@ -93,7 +93,7 @@ export default function SideNav() {
                   className="rounded-full"
                 />
                 <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-red-700 to-purple-500 text-transparent bg-clip-text ml-2">
-                  Cera<span className="text-2xl">Safe</span>
+                  Cere<span className="text-2xl">Safe</span>
                 </h1>
               </div>
               {SideNavMenu.map((menu, index) => (
