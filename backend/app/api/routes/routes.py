@@ -30,11 +30,13 @@ async def predict(input_data: PredictionInputSingle):
 
        
         processed_features = model_pipeline.named_steps['preprocessor'].transform(features)
+       
 
         classifier = model_pipeline.named_steps['classifier']
         prediction = classifier.predict(processed_features)[0]
         probability = classifier.predict_proba(processed_features)[0][1]
-
+        
+        
         # Access base model for SHAP/explainability
         model = None
         if hasattr(classifier, 'named_estimators_'):
@@ -42,7 +44,7 @@ async def predict(input_data: PredictionInputSingle):
         else:
             model = classifier  # fallback if it's not an ensemble
 
-        # Optional: Feature importance or SHAP could go here
+      
 
         result = RefinePredictionResult(
             prediction=prediction,
@@ -50,6 +52,7 @@ async def predict(input_data: PredictionInputSingle):
             model=model,
             features=processed_features
         )
+        
         return result
     except Exception as e:
         

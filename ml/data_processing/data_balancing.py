@@ -4,20 +4,20 @@ from imblearn.under_sampling import RandomUnderSampler
 from imblearn.combine import SMOTEENN,SMOTETomek
 def DataBalancer(name:str,feature: pd.DataFrame,target: pd.DataFrame,technique:str):
     if technique =="under":
-        sampler=RandomUnderSampler(sampling_strategy="0.5",random_state=42)
+        sampler=RandomUnderSampler(sampling_strategy=0.2,random_state=42)
     elif technique=="asad":
-        sampler=ADASYN(random_state=42)
+        sampler=ADASYN(random_state=42,sampling_strategy=0.3)
     elif technique =="ros":
-        sampler=RandomOverSampler(sampling_strategy="0.3",random_state=42)
+        sampler=RandomOverSampler(sampling_strategy=0.3,random_state=42)
     elif technique =="bsmote":
-        sampler=BorderlineSMOTE( sampling_strategy="0.3",  # Minority class to 50% of majority
+        sampler=BorderlineSMOTE( sampling_strategy=0.3,  # Minority class to 50% of majority
     k_neighbors=5,          # Default but explicit
     random_state=42,
     kind='borderline-2'   )
     elif technique == "smote":
-        sampler=SMOTE(sampling_strategy="0.3",random_state=42)
+        sampler=SMOTE(sampling_strategy=0.5,random_state=42)
     elif technique=="hybrid":
-        sampler=SMOTEENN(sampling_strategy="0.5",random_state=42)
+        sampler=SMOTEENN(sampling_strategy=0.5,random_state=42)
     else:
         print("Balancing Technique is not provided")
     

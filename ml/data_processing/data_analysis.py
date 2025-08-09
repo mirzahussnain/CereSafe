@@ -45,7 +45,7 @@ def display_hypertension_distribution(df1, df2=None):
 
 
 def display_stroke_distribution(df1, df2=None):
-    
+    if "Stroke" not in df1.columns:return
     stroke_st_column=get_column(df1,"stroke")
     print(f"\nStroke Dataset:")
     display_column_distribution(stroke_st_column,df1)
@@ -110,31 +110,37 @@ def display_missing_values(name, df):
         print(f"{name} Dataset has no missing values")
 
 
-def display_individual_datasets_information(df1:pd.DataFrame, df2:pd.DataFrame):
+def display_individual_datasets_information(df1:pd.DataFrame, df2:pd.DataFrame=None):
     sd=df1.copy()
-    pd=df2.copy()
     print(f"Stroke Dataset Has {len(df1.columns)} features as follows:")
     print(df1.columns.tolist())
-    print(f"\nParkinsons Dataset Has {len(df2.columns)} features as follows:")
-    print(df2.columns.tolist())
-    
-    sd=sd.rename(columns=lambda x:x.lower())
-    pd=pd.rename(columns=lambda x:x.lower())
     # Missing Values
     print("\nMissing Values:")
     display_missing_values("Stroke", sd)
-    display_missing_values("Parkinsons", pd)
-
     # Data Types
     print("\nData Types:")
     print("Stroke Dataset has features of following datatypes:")
     print(sd.dtypes)
-    print("\nParkinsons Dataset has features of following datatypes:")
-    print(pd.dtypes)
+    sd=sd.rename(columns=lambda x:x.lower())
+    pd=None
+    if df2 is not None:
+        pd=df2.copy()
+        print(f"\nParkinsons Dataset Has {len(df2.columns)} features as follows:")
+        print(df2.columns.tolist())
+        
+        pd=pd.rename(columns=lambda x:x.lower())
+        print("\nMissing Values:")
+        display_missing_values("Parkinsons", pd)
 
-    print("\nBoth Datasets has following common features:")
-    print(get_common_columns(sd, pd))
+        # Data Types
+        print("\nData Types:")
+        print("\nParkinsons Dataset has features of following datatypes:")
+        print(pd.dtypes)
 
+        print("\nBoth Datasets has following common features:")
+        print(get_common_columns(sd, pd))
+
+    
     print("\n=== Gender Distribution Analysis ===")
     display_gender_distribution(sd, pd)
 
@@ -152,7 +158,6 @@ def display_individual_datasets_information(df1:pd.DataFrame, df2:pd.DataFrame):
 
     print("\n=== Stroke Distribution Analysis ===")
     display_stroke_distribution(sd, pd)
-    
     
 def display_combined_dataset_information(df:pd.DataFrame):
     md=df.copy()

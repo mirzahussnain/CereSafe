@@ -1,48 +1,57 @@
 import shap
+import pandas as pd
+
+def get_risk_level(probability: float) -> str:
+    """Categorize risk level based on probability."""
+    if probability < 0.2:
+        return "Low"
+    elif probability < 0.5:
+        return "Moderate"
+    else:
+        return "High"
 
 
-def get_risk_level(probability):
-        """Categorize risk level based on probability"""
-        if probability < 0.3:
-            return "Low"
-        elif probability < 0.6:
-            return "Moderate"
-        else:
-            return "High"
-
-
-def RefinePredictionResult(prediction, probability,model,features):
+def RefinePredictionResult(prediction: int, probability: float, model, features):
     """
-    Refines the prediction result by formatting it into a dictionary.
+    Refines the prediction result by adding risk level and top SHAP feature contributions.
 
     Args:
-        prediction (int): The predicted class label.
-        probability (float): The probability of the predicted class.
-        top_features (list): A list of tuples containing feature names and their SHAP values.
+        prediction (int): Predicted class label.
+        probability (float): Probability of the positive class.
+        model: Trained model used for prediction.
+        features (pandas.DataFrame or array-like): Feature values for explanation.
 
     Returns:
-        dict: A dictionary containing the prediction, probability, and top features.
+        dict: Dictionary containing the prediction, probability, SHAP top contributors, and risk level.
     """
-    riskLevel= get_risk_level(probability)
-    explainer = shap.Explainer(model)
-    shap_values = explainer(features)
+    # Ensure features is a DataFrame to preserve column names for SHAP
+    if not isinstance(features, pd.DataFrame):
+        raise ValueError("Features must be a pandas DataFrame with column names.")
+
+    risk_level = get_risk_level(probability)
+
+    # Explain model prediction
+    explainer = shap.Explainer(model, features)
+    shap_values = explainer(features.iloc[[0]])  # Only first row for single prediction
+
+    # Extract and sort top features
     top_features = sorted(
-            zip(
-                shap_values[0].feature_names,  # Feature names
-                shap_values[0].data,            # Original values
-                shap_values[0].values           # SHAP values
-            ),
-            key=lambda x: abs(x[2]),            # Sort by absolute impact
-            reverse=True
-        )[:5]  # Get top 5 features with largest absolute SHAP values
-    results = {
-        'success':1,
+        zip(
+            shap_values.feature_names,
+            shap_values.data[0],
+            shap_values.values[0]
+        ),
+        key=lambda x: abs(x[2]),
+        reverse=True
+    )[:5]
+
+    return {
+        'success': 1,
         'prediction': int(prediction),
         'probability': float(probability),
         'top_contributors': [
-            {'feature': name, 'value': float(val), 'impact': float(shap_val)}
-            for name, val, shap_val in top_features
+            {'feature': name, 'value': float(val), 'impact': float(impact)}
+            for name, val, impact in top_features
         ],
-        'risk_level': riskLevel,
+        'risk_level': risk_level,
     }
-    return results

@@ -14,7 +14,6 @@ app = FastAPI(title="Stroke Risk Prediction", description="API for Stroke risk p
 
 load_dotenv()
 raw_origins = os.getenv("FRONTEND_URLS", "")
-print(raw_origins)
 
 origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
 
