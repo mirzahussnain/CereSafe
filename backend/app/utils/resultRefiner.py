@@ -1,6 +1,11 @@
 import shap
 import pandas as pd
 
+
+
+
+
+
 def get_risk_level(probability: float) -> str:
     """Categorize risk level based on probability."""
     if probability < 0.2:
@@ -11,7 +16,7 @@ def get_risk_level(probability: float) -> str:
         return "High"
 
 
-def RefinePredictionResult(prediction: int, probability: float, model, features):
+def RefinePredictionResult(prediction: int, probability: float, model, features,background_data):
     """
     Refines the prediction result by adding risk level and top SHAP feature contributions.
 
@@ -27,11 +32,13 @@ def RefinePredictionResult(prediction: int, probability: float, model, features)
     # Ensure features is a DataFrame to preserve column names for SHAP
     if not isinstance(features, pd.DataFrame):
         raise ValueError("Features must be a pandas DataFrame with column names.")
-
+    
+    print(background_data)
+   
     risk_level = get_risk_level(probability)
 
     # Explain model prediction
-    explainer = shap.Explainer(model, features)
+    explainer = shap.LinearExplainer(model, background_data)
     shap_values = explainer(features.iloc[[0]])  # Only first row for single prediction
 
     # Extract and sort top features

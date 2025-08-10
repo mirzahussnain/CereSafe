@@ -1,3 +1,6 @@
 model:
   merged_data: services/sp.joblib
   single_data: services/stp.joblib
+data:
+  train:
+      stroke: data/train/stroke/features.csv

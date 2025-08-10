@@ -15,4 +15,5 @@ def get_config():
     # Also fix model path if needed
     config["model"]["merged_data"] = str(backend_dir / config["model"]["merged_data"])
     config["model"]["single_data"] = str(backend_dir /  config["model"]["single_data"])
+    config["data"]["train"]["stroke"] = str(backend_dir / config["data"]["train"]["stroke"])
     return config

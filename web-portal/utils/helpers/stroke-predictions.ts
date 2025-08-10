@@ -15,7 +15,7 @@ export const predictStroke=async(data:HealthDataFormType)=>{
         Bmi:data.Bmi,
         IsWorking:data.IsWorking?"Yes":"No",
         SmokingStatus:data.SmokingStatus,
-        Diabetes:data.AvgGlucoseLevel>126?1:0,
+        Diabetes:data.AvgGlucoseLevel>138?1:0,
     }
     const apiPath=process.env.NEXT_PUBLIC_MODEL_API
     const response=await fetch(`${apiPath}/api/predict`,{

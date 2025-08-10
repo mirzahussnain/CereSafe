@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     }
     const refinedData: HealthDataDatabaseType = {
       age: parsedData.data.Age,
-      diabetes: parsedData.data.AvgGlucoseLevel >126,
+      diabetes: parsedData.data.AvgGlucoseLevel >138,
       ever_married: parsedData.data.EverMarried === "Yes",
       is_working: parsedData.data.SmokingStatus === "Yes",
       residence_type: parsedData.data.ResidenceType,

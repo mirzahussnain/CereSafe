@@ -104,35 +104,32 @@ export const navItems: (NavItem | NavGroupType)[] = [
   },
 ];
 
-export const getRefinedFeatures = (factors: RiskFactor[]): string[] => {
-    return factors.map(factor => {
-      switch (factor.feature) {
-        case 'Hypertension':
-          return `You have ${factor.value==0?"normal blood pressure":"hypertension (high blood pressure)"}`;
-        case 'Bmi':
-          return `Your Bmi is ${factor.value} which indicates you are ${factor.value < 18.5 ? 'underweight' : factor.value < 24.9 ? 'normal weight' : factor.value < 29.9 ? 'overweight' : 'obese'}.`;
-        case 'Age':
-          return `Your Age is ${factor.value} which is a ${factor.value > 50 ? 'significant' : 'minor'} factor in stroke risk`;
-        case 'HeartDisease':
-          return `You have ${factor.value==0?"normal heart health":"heart disease"}`;
-        case 'AvgGlucoseLevel':
-          return `Your average glucose level is ${factor.value} mg/dL, which is considered ${factor.value < 100 ? 'normal' : factor.value < 126 ? 'prediabetic' : 'diabetic'}`;
-        case 'SmokingStatus':
-          return `You are ${factor.value ? 'a smoker' : 'a non-smoker'}`;
-        case 'IsWorking':
-          return `You are ${factor.value ? 'currently working' : 'not working'}`;
-        case 'ResidenceType':
-          return `You live in a ${factor.value === 0 ? 'Urban' : 'Rural'} Area`;
-        case 'Gender':
-          return `You are ${factor.value === 0 ? 'Male' : 'Female'}`;
-        case 'EverMarried':
-          return `You are ${factor.value ? 'Married' : 'Not Married'}`;
-        case 'Diabetes':
-          return `You have ${factor.value ? 'Diabetes' : 'No Diabetes'}`;
-        default:
-          return factor.feature;
-      }
-    });
+export const getRefinedFeatures = (factor: RiskFactor): string => {
+   const { feature, value } = factor;
+
+  switch (feature) {
+    case "SmokingStatus":
+      return value === 1 ? "You smoke or have smoked before." : "You have never smoked.";
+    case "EverMarried":
+      return value === 1 ? "You are married or have been married before." : "You have never been married.";
+    case "HeartDisease":
+      return value === 1 ? "You have heart disease." : "You do not have heart disease.";
+    case "Diabetes":
+      return value === 1 ? "You have diabetes." : "You do not have diabetes.";
+    case "IsWorking":
+      return value === 1 ? "You are currently working." : "You are not currently working.";
+    case "Gender":
+      return value === 1 ? "You are female." : "You are male.";
+    case "Hypertension":
+      return value === 1 ? "You have hypertension (high blood pressure)." : "You have normal blood pressure.";
+    case "ResidenceType":
+      return value === 1 ? "You live in an urban area." : "You live in a rural area.";
+    case "AvgGlucoseLevel":
+      return value >138 ? "You have high sugar levels" : value >123 ? "You have moderate sugar levels " : "Your blood sugar levels are fine"
+    default:
+      // For numeric or non-binary, just show the raw value
+      return `${value}`;
+  }
   }
 
 

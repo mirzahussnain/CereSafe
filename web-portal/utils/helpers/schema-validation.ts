@@ -47,7 +47,7 @@ export const HealthDataFormSchema=z.object({
   Gender:z.enum(["Male","Female"]),
   ResidenceType:z.enum(["Urban","Rural"]),
   AvgGlucoseLevel:z.number(),
-  Bmi:z.number().max(50,"Bmi can't be more than 50"),
+  Bmi:z.number().max(100,"Bmi can't be more than 100"),
   IsWorking:z.boolean(),
   SmokingStatus:z.enum(["Yes","No"],"Smoking status can only be Yes or No"),
  
@@ -61,7 +61,7 @@ export const HealthDataDatabaseSchema=z.object({
   gender:z.enum(["Male","Female"]),
   residence_type:z.enum(["Urban","Rural"]),
   avg_glucose_level:z.number(),
-  bmi:z.number().max(50,"Bmi can't be more than 50"),
+  bmi:z.number().max(100,"Bmi can't be more than 100"),
   is_working:z.boolean(),
   smoking_status:z.boolean(),
   diabetes:z.boolean()
