@@ -33,7 +33,6 @@ def RefinePredictionResult(prediction: int, probability: float, model, features,
     if not isinstance(features, pd.DataFrame):
         raise ValueError("Features must be a pandas DataFrame with column names.")
     
-    print(background_data)
    
     risk_level = get_risk_level(probability)
 
