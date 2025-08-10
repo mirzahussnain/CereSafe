@@ -46,13 +46,16 @@ export default function Result({
           </div>
           {predictionResult.factors.length > 0 && (
             <div className="col-span-full px-2">
+              <div className="w-full flex flex-col items-center">
+
               <h3 className="text-center w-full text-xl font-bold md:w-fit px-2 tracking-wide text-muted-foreground">
                 Key Risk Factors
               </h3>
-              <p className="w-full text-center md:text-start font-semibold text-muted-foreground/60 ml-2">
-                Following factors contributed most to your stroke risk
+              <p className="w-full text-center font-semibold text-muted-foreground/60 ml-2 text-wrap">
+                Following factors contributed to your stroke risk
                 assessment:
               </p>
+              </div>
               {/* <ul className="px-3 flex flex-col  gap-2 my-3">
                     {predictionResult.factors.map((factor, index) => (
                       <li key={index} className="md:grid grid-cols-2 gap-2 text-sm flex flex-col items-center">

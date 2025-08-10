@@ -15,12 +15,13 @@ function getRiskLevel(impact: number): { level: string; colorClass: string } {
 
 const PredictionImpactTable = ({ factors }:{factors:RiskFactor[]}) => {
   return (
-    <div className=" mt-5 overflow-x-auto rounded-md border border-background">
+    <div className=" mt-5 overflow-x-auto rounded-md border border-overlay-2">
       <table className="w-full text-left text-sm text-gray-700">
         <thead className="bg-secondary/70 text-secondary-foreground">
           <tr>
             <th className="px-4 py-2 font-medium">Feature</th>
             <th className="px-4 py-2 font-medium">Value</th>
+             <th className="px-4 py-2 font-medium">Interpretation</th>
             <th className="px-4 py-2 font-medium">Impact Level</th>
           </tr>
         </thead>
@@ -30,9 +31,10 @@ const PredictionImpactTable = ({ factors }:{factors:RiskFactor[]}) => {
             return (
               <tr
                 key={factor.feature}
-                className="border-t border-overlay-2 bg-card hover:bg-secondary/20 transition-colors text-primary"
+                className="border-t text-nowrap border-overlay-2 bg-card hover:bg-secondary/20 transition-colors text-primary"
               >
                 <td className="px-4 py-2 capitalize">{factor.feature}</td>
+                <td className="px-4 py-2">{factor.value}</td>
                 <td className="px-4 py-2">{getRefinedFeatures(factor)}</td>
                 <td className={`px-4 py-2 font-semibold ${colorClass}`}>{level}</td>
               </tr>

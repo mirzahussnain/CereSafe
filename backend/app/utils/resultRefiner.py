@@ -49,7 +49,7 @@ def RefinePredictionResult(prediction: int, probability: float, model, features,
         ),
         key=lambda x: abs(x[2]),
         reverse=True
-    )[:5]
+    )[::]
 
     return {
         'success': 1,

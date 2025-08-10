@@ -1,7 +1,20 @@
-import { User, FileText, CheckCircle, BrainCircuit, BarChart2, FileDown, BarChart, LayoutDashboardIcon, Settings,HistoryIcon, Goal, HomeIcon } from "lucide-react";
-import {  NavGroupType, NavItem, RiskFactor } from "./types";
+import {
+  User,
+  FileText,
+  CheckCircle,
+  BrainCircuit,
+  BarChart2,
+  FileDown,
+  BarChart,
+  LayoutDashboardIcon,
+  Settings,
+  HistoryIcon,
+  Goal,
+  HomeIcon,
+} from "lucide-react";
+import { NavGroupType, NavItem, RiskFactor } from "./types";
 
-export const LandingPageData= [
+export const LandingPageData = [
   {
     title: "User Registration",
     description: "Patient creates an account and logs in securely.",
@@ -48,24 +61,24 @@ export const LandingPageData= [
 ];
 
 export const navItems: (NavItem | NavGroupType)[] = [
-    { href: "/", label: "Home" },
-    [
-      {
-        href: "/services/stroke-prediction/about",
-        label: "Stroke Prediction",
-        desc: "Predict Stroke Risk with AI",
-      },
-      // {
-      //   href: "/services/health-shorts/about",
-      //   label: "Health Shorts",
-      //   desc: "Watch Short Videos on Healthcare Topics",
-      // },
-    ],
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-  ];
+  { href: "/", label: "Home" },
+  [
+    {
+      href: "/services/stroke-prediction/about",
+      label: "Stroke Prediction",
+      desc: "Predict Stroke Risk with AI",
+    },
+    // {
+    //   href: "/services/health-shorts/about",
+    //   label: "Health Shorts",
+    //   desc: "Watch Short Videos on Healthcare Topics",
+    // },
+  ],
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
 
-  export const SideNavMenu = [
+export const SideNavMenu = [
   {
     heading: "MENU",
     items: [
@@ -79,17 +92,17 @@ export const navItems: (NavItem | NavGroupType)[] = [
         icon: <HistoryIcon />,
         path: "/dashboard/history",
       },
-       {
+      {
         title: "Home",
         icon: <HomeIcon />,
         path: "/",
       },
-     
+
       {
         title: "Prediction Result",
         icon: <Goal />,
         path: "/dashboard/prediction-result",
-      }
+      },
     ],
   },
   {
@@ -105,39 +118,62 @@ export const navItems: (NavItem | NavGroupType)[] = [
 ];
 
 export const getRefinedFeatures = (factor: RiskFactor): string => {
-   const { feature, value } = factor;
+  const { feature, value } = factor;
 
   switch (feature) {
     case "SmokingStatus":
-      return value === 1 ? "You smoke or have smoked before." : "You have never smoked.";
+      return value === 1
+        ? "You smoke or have smoked before."
+        : "You have never smoked.";
     case "EverMarried":
-      return value === 1 ? "You are married or have been married before." : "You have never been married.";
+      return value === 1
+        ? "You are married or have been married before."
+        : "You have never been married.";
     case "HeartDisease":
-      return value === 1 ? "You have heart disease." : "You do not have heart disease.";
+      return value === 1
+        ? "You have heart disease."
+        : "You do not have heart disease.";
     case "Diabetes":
       return value === 1 ? "You have diabetes." : "You do not have diabetes.";
     case "IsWorking":
-      return value === 1 ? "You are currently working." : "You are not currently working.";
+      return value === 1
+        ? "You are currently working."
+        : "You are not currently working.";
     case "Gender":
       return value === 1 ? "You are female." : "You are male.";
     case "Hypertension":
-      return value === 1 ? "You have hypertension (high blood pressure)." : "You have normal blood pressure.";
+      return value === 1
+        ? "You have hypertension (high blood pressure)."
+        : "You have normal blood pressure.";
     case "ResidenceType":
-      return value === 1 ? "You live in an urban area." : "You live in a rural area.";
+      return value === 1
+        ? "You live in an urban area."
+        : "You live in a rural area.";
     case "AvgGlucoseLevel":
-      return value >138 ? "You have high sugar levels" : value >123 ? "You have moderate sugar levels " : "Your blood sugar levels are fine"
+      return value > 138
+        ? "You have high sugar levels"
+        : value > 123
+        ? "You have moderate sugar levels "
+        : "Your blood sugar levels are fine";
+    case "Bmi":
+      return value >= 40
+        ? "You're in the severely obese range"
+        : value >= 30 && value <= 39.9
+        ? "You're in the obese range"
+        : value >= 25 && value <= 29.9
+        ? "You're in the overweight range"
+        : value >= 18.5 && value <= 24.9
+        ? "You're are in healthy range"
+        : "You're in underweight range.";
     default:
       // For numeric or non-binary, just show the raw value
       return `${value}`;
   }
-  }
+};
 
-
-
-
-
-
-  export const getRiskLevel = (factor: RiskFactor): "high" | "moderate" | null => {
+export const getRiskLevel = (
+  factor: RiskFactor
+): "high" | "moderate" | null => {
   switch (factor.feature) {
     case "Hypertension":
       return factor.value === 1 ? "high" : null;
@@ -150,8 +186,8 @@ export const getRefinedFeatures = (factor: RiskFactor): string => {
     case "HeartDisease":
       return factor.value === 1 ? "high" : null;
     case "AvgGlucoseLevel":
-      if (factor.value >= 126) return "high"; // diabetic
-      if (factor.value >= 100) return "moderate"; // prediabetic
+      if (factor.value >= 138) return "high"; // diabetic
+      if (factor.value >= 123) return "moderate"; // prediabetic
       return null;
     case "SmokingStatus":
       return factor.value === 1 ? "high" : null;
@@ -162,32 +198,32 @@ export const getRefinedFeatures = (factor: RiskFactor): string => {
   }
 };
 
+export const RiskColorTag = (riskLevel?: string): string => {
+  switch (riskLevel?.toLowerCase()) {
+    case "low":
+      return "bg-green-300/80 text-secondary-foreground   border-2 border-green-400";
+    case "moderate":
+      return `bg-yellow-300/80 text-secondary-foreground border-yellow-300`;
+    case "high":
+      return "bg-destructive/70 text-secondary-foreground border-red-300";
+    default:
+      return "bg-gray-100 text-gray-800 border-gray-300";
+  }
+};
 
-  export const RiskColorTag = (riskLevel?: string): string => {
-    switch (riskLevel?.toLowerCase()) {
-      case 'low':
-        return 'bg-green-300/80 text-secondary-foreground   border-2 border-green-400';
-      case 'moderate':
-        return `bg-yellow-300/80 text-secondary-foreground border-yellow-300`;
-      case 'high':
-         return 'bg-destructive/70 text-secondary-foreground border-red-300';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-300';
-    }
-  };
+export const RiskColorCard = (riskLevel?: string): string => {
+  switch (riskLevel?.toLowerCase()) {
+    case "low":
+      return `from-card via-backround to-green-300
+         from-80% via-90% to-100% text-yellow-800`;
 
-  export const RiskColorCard = (riskLevel?: string): string => {
-    switch (riskLevel?.toLowerCase()) {
-      case 'low': return `from-card via-backround to-green-300
+    case "moderate":
+      return `from-card via-backround to-yellow-300
          from-80% via-90% to-100% text-yellow-800`;
-      
-      case 'moderate':
-        return `from-card via-backround to-yellow-300
+    case "high":
+      return `from-card via-backround to-red-400
          from-80% via-90% to-100% text-yellow-800`;
-      case 'high':
-        return `from-card via-backround to-red-400
-         from-80% via-90% to-100% text-yellow-800`;
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-300';
-    }
-  };
+    default:
+      return "bg-gray-100 text-gray-800 border-gray-300";
+  }
+};
