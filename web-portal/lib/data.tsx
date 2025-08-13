@@ -15,17 +15,11 @@ import {
 import { NavGroupType, NavItem, RiskFactor } from "./types";
 
 export const LandingPageData = [
-  {
-    title: "User Registration",
-    description: "Patient creates an account and logs in securely.",
-
-    badge: "Step 1",
-    icon: <User className="w-5 h-5 text-blue-600" />,
-  },
+  
   {
     title: "Medical Form Submission",
     description:
-      "Patient fills a form with health metrics like age, blood pressure, etc.",
+      "User fills a form with health metrics like age, blood pressure, etc.",
 
     badge: "Step 2",
     icon: <FileText className="w-5 h-5 text-yellow-600" />,
@@ -43,6 +37,13 @@ export const LandingPageData = [
 
     badge: "Step 4",
     icon: <BrainCircuit className="w-5 h-5 text-purple-600" />,
+  },
+  {
+    title: "User Authentication/Data Storage Consent",
+    description: "If the user is not signed in, they are asked to either see their prediction results anonymously or sign in to avail features like Personalized Dashboard",
+
+    badge: "Step 1",
+    icon: <User className="w-5 h-5 text-blue-600" />,
   },
   {
     title: "Result Visualization",
