@@ -21,28 +21,28 @@ export const LandingPageData = [
     description:
       "User fills a form with health metrics like age, blood pressure, etc.",
 
-    badge: "Step 2",
+    badge: "Step 1",
     icon: <FileText className="w-5 h-5 text-yellow-600" />,
   },
   {
     title: "Input Validation",
     description: "The system validates and normalizes the input data.",
 
-    badge: "Step 3",
+    badge: "Step 2",
     icon: <CheckCircle className="w-5 h-5 text-green-600" />,
   },
   {
     title: "Stroke Risk Prediction",
     description: "ML model processes the data to predict stroke risk.",
 
-    badge: "Step 4",
+    badge: "Step 3",
     icon: <BrainCircuit className="w-5 h-5 text-purple-600" />,
   },
   {
     title: "User Authentication/Data Storage Consent",
     description: "If the user is not signed in, they are asked to either see their prediction results anonymously or sign in to avail features like Personalized Dashboard",
 
-    badge: "Step 1",
+    badge: "Step 4",
     icon: <User className="w-5 h-5 text-blue-600" />,
   },
   {
