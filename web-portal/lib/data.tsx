@@ -17,9 +17,9 @@ import { NavGroupType, NavItem, RiskFactor } from "./types";
 export const LandingPageData = [
   
   {
-    title: "Medical Form Submission",
+    title: "Assessment Form Submission",
     description:
-      "User fills a form with health metrics like age, blood pressure, etc.",
+      "User fills a form with health metrics like age, bmi, glucose level, etc.",
 
     badge: "Step 1",
     icon: <FileText className="w-5 h-5 text-yellow-600" />,
