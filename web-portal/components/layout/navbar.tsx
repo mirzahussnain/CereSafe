@@ -242,7 +242,7 @@ export default function Navbar() {
             className="rounded-full"
           />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-red-700 to-purple-500 text-transparent bg-clip-text ml-2">
-            Cera<span className="text-xl">Safe</span>
+            Cere<span className="text-xl">Safe</span>
           </h1>
         </div>
         <motion.button
