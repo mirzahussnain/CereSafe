@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
+import shap
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score,roc_curve
-from sklearn.model_selection import StratifiedKFold, cross_val_score, RandomizedSearchCV
+from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score,roc_curve
+from sklearn.model_selection import StratifiedKFold, cross_val_score, RandomizedSearchCV, learning_curve
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
@@ -56,7 +57,35 @@ def plot_roc_curves(models, X_test, y_test):
     plt.tight_layout()
     plt.show()
 
+def plot_confusion_matrix(model, X_test, y_test, title="Confusion Matrix"):
+    """Plot confusion matrix for a fitted model."""
+    y_pred = model.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot(cmap="Blues")
+    plt.title(title)
+    plt.show()
 
+def plot_learning_curve(model, X, y, cv=5, scoring='accuracy', title="Learning Curve"):
+    """Plot train/validation learning curve for a model."""
+    train_sizes, train_scores, val_scores = learning_curve(
+        model, X, y, cv=cv, scoring=scoring, n_jobs=-1,
+        train_sizes=np.linspace(0.1, 1.0, 10), shuffle=True, random_state=42
+    )
+
+    train_mean = np.mean(train_scores, axis=1)
+    val_mean = np.mean(val_scores, axis=1)
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(train_sizes, train_mean, 'o-', label="Training score")
+    plt.plot(train_sizes, val_mean, 'o-', label="Validation score")
+    plt.title(title)
+    plt.xlabel("Training examples")
+    plt.ylabel(scoring.capitalize())
+    plt.legend(loc="best")
+    plt.grid(True)
+    plt.show()
+    
 def plot_model_performance(results_df, metrics=('Test_Accuracy', 'Test_Recall', 'Test_F1', 'Test_ROC_AUC')):
     """
     Plot performance metrics from results dataframe.
@@ -82,6 +111,24 @@ def plot_model_performance(results_df, metrics=('Test_Accuracy', 'Test_Recall', 
     plt.tight_layout()
     plt.grid(axis='y', linestyle='--', linewidth=0.5)
     plt.show()
+    
+def plot_shap_feature_importance(model, X_train, X_test, feature_names=None):
+    
+    explainer = shap.LinearExplainer(model, X_train)
+
+    # Compute SHAP values on test data
+    shap_values = explainer.shap_values(X_test)
+
+    # Summary plot
+    shap.summary_plot(shap_values, X_test, feature_names=feature_names, show=False)
+    plt.tight_layout()
+    plt.show()
+
+    # Bar plot (mean absolute importance)
+    shap.summary_plot(shap_values, X_test, feature_names=feature_names, plot_type="bar", show=False)
+    plt.tight_layout()
+    plt.show()
+    
 def train_models(models, X_train, y_train):
     """Train a dictionary of models and return fitted models."""
     fitted_models = {}
@@ -304,4 +351,10 @@ def model_trainer_and_evaluator(X_train, y_train, X_test, y_test, hpt=False, use
     output = print_and_select_best_model(results, X_test, y_test, X_new_data)
     print(output['best_model'])
     
+    print("\nGenerating additional plots for best model...")
+    plot_confusion_matrix(output['best_model'], X_test, y_test, title=f"Confusion Matrix - {type(output['best_model']).__name__}")
+
+    # Learning Curve
+    plot_learning_curve(output['best_model'], X_train, y_train, cv=5, scoring="f1", title=f"Learning Curve - {type(output['best_model']).__name__}")
+    plot_shap_feature_importance(output['best_model'], X_train, X_test)
     return output['best_model']

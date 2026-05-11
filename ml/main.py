@@ -60,7 +60,7 @@ def main():
                 
 
                 X_train_resampled, y_train_resampled = DataBalancer("Stroke", X_train, y_train, "ros")
-                model = model_trainer(X_train_resampled, y_train_resampled, X_test, y_test,"merged")
+                model = model_trainer_and_evaluator(X_train_resampled, y_train_resampled, X_test, y_test,"merged")
                 model_path=Path(config["artifacts"]["models"]) / "sp_model.pkl"
                 dump(model,model_path)
                 stroke_pred_pipeline = ImbPipeline([
