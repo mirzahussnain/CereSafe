@@ -104,11 +104,11 @@ export default function HistoryPage() {
             <Card className="p-6 text-center">
               <h3 className="text-muted-foreground">Highest Stroke Risk</h3>
               <p className="text-4xl font-bold text-red-500 mt-2">
-                {parseFloat(
+                {(
                   Math.max(
                     ...userPredictions.map((a) => a.probability)
-                  ).toFixed(2)
-                ) * 100}
+                  ) * 100
+                ).toFixed(1)}
                 %
               </p>
             </Card>
@@ -127,12 +127,12 @@ export default function HistoryPage() {
                   <TrendingDown className="w-8 h-8 text-green-500" />
                 )}
                 <p className="text-2xl font-bold ml-2">
-                  {parseFloat(
+                  {(
                     Math.abs(
                       userPredictions[0].probability -
                         userPredictions[1].probability
-                    ).toFixed(2)
-                  ) * 100}
+                    ) * 100
+                  ).toFixed(1)}
                   %
                 </p>
               </div>
@@ -185,16 +185,14 @@ export default function HistoryPage() {
                           style={{
                             width: `${
                               parseFloat(
-                                userPredictions[0].probability.toFixed(2)
-                              ) * 100
+                                (userPredictions[0].probability * 100).toFixed(1)
+                              )
                             }%`,
                           }}
                         />
                       </div>
                       <span className="font-bold">
-                        {parseFloat(userPredictions[0].probability.toFixed(2)) *
-                          100}
-                        %
+                        {(userPredictions[0].probability * 100).toFixed(1)}%
                       </span>
                     </div>
                   </div>
@@ -324,16 +322,14 @@ export default function HistoryPage() {
                                 style={{
                                   width: `${
                                     parseFloat(
-                                      prediction.probability.toFixed(2)
-                                    ) * 100
+                                      (prediction.probability * 100).toFixed(1)
+                                    )
                                   }%`,
                                 }}
                               ></div>
                             </div>
                             <span className="text-sm font-medium">
-                              {parseFloat(prediction.probability.toFixed(2)) *
-                                100}
-                              %
+                              {(prediction.probability * 100).toFixed(1)}%
                             </span>
                           </div>
                         </div>
@@ -421,9 +417,7 @@ export default function HistoryPage() {
                             {prediction.risk_level}
                           </Badge>
                         </TableCell>
-                        <TableCell>{ parseFloat(
-                                      prediction.probability.toFixed(2)
-                                    ) * 100}%</TableCell>
+                        <TableCell>{((prediction.probability * 100)).toFixed(1)}%</TableCell>
                         <TableCell>
                           <div className="flex flex-wrap gap-1">
                             {prediction.factors.map((factor, index) => (

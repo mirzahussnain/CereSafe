@@ -40,7 +40,7 @@ export function PredictionTrendChart({ predictionsData }: { predictionsData: Use
           month: "2-digit",
           day: "2-digit",
         }).replace(/\//g, "-"),
-        risk_value: parseFloat((prediction.probability * 100).toFixed(2)),
+        risk_value: parseFloat((prediction.probability * 100).toFixed(1)),
       }));
 
     // Monthly trend: average risk per month
@@ -57,7 +57,7 @@ export function PredictionTrendChart({ predictionsData }: { predictionsData: Use
     const monthly = Array.from(monthlyMap.entries())
       .map(([date, { total, count }]) => ({
         date,
-        risk_value: parseFloat((total / count).toFixed(2)),
+        risk_value: parseFloat((total / count).toFixed(1)),
       }))
       .sort((a, b) => a.date.localeCompare(b.date));
 

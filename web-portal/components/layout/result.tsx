@@ -41,7 +41,7 @@ export default function Result({
               Stroke Chance
             </h3>
             <p className="text-xl font-medium mt-0.5 p-1 text-center">
-              {parseFloat(predictionResult.probability.toFixed(2)) * 100}%
+              {(predictionResult.probability * 100).toFixed(1)}%
             </p>
           </div>
           {predictionResult.factors.length > 0 && (

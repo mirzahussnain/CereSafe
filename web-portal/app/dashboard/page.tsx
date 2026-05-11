@@ -132,7 +132,7 @@ export default function Dashboard() {
               )}`}
             >
               {predictions[0].risk_level} (
-              {parseFloat(predictions[0].probability.toFixed(2)) * 100}%)
+              {(predictions[0].probability * 100).toFixed(1)}%)
             </Badge>
           </CardDescription>
         </CardHeader>
@@ -153,10 +153,10 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold text-center py-2">
-              {parseFloat(predictions[0].probability.toFixed(2)) * 100}%
+              {(predictions[0].probability * 100).toFixed(1)}%
             </div>
             <Progress
-              value={parseFloat((predictions[0].probability * 100).toFixed(2))}
+              value={parseFloat((predictions[0].probability * 100).toFixed(1))}
               className={`h-2 ${RiskColorTag(predictions[0].risk_level)}`}
             />
           </CardContent>
@@ -246,7 +246,7 @@ export default function Dashboard() {
                 </p>
                 <p className="text-muted-foreground text-xm">
                   Stroke Predicted:{" "}
-                  {parseFloat((log.probability * 100).toFixed(2))}%
+                  {(log.probability * 100).toFixed(1)}%
                 </p>
               </div>
             ))}
